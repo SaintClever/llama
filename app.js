@@ -1,19 +1,29 @@
-// import APCA_API_KEYS from "./env.js";
+// import APCA_API_KEY from "./env.js";
 const url = "https://paper-api.alpaca.markets/v2/account";
 
+// Account
 let accountNumber = document.querySelector("#account_number");
 let buyingPower = document.querySelector("#buying_power");
 let cash = document.querySelector("#cash");
+
+// Trading
 let symbol = document.querySelector("#symbol");
 let quantity = document.querySelector("#quantity");
 let buy = document.querySelector("#buy");
 let sell = document.querySelector("#sell");
+
+// Historical Auctions
+let startDate = document.querySelector("#start_date");
+let endDate = document.querySelector("#end_date");
+let historicalSymbol = document.querySelector("#historical_symbol");
+
+// Account Activites
 let table = document.querySelector("#table");
 let tbody = table.querySelector("tbody");
 
 
-// API Call
-(apiCall = async () => {
+// Account Data
+(accountData = async () => {
   try {
     const url = "https://paper-api.alpaca.markets/v2/account";
     const config = {
@@ -43,9 +53,10 @@ let tbody = table.querySelector("tbody");
 })();
 
 
-(activities = async () => {
+// Account Activities
+(accountActivities = async () => {
 try {
-  const url = "https://paper-api.alpaca.markets/v2/account/activities?direction=desc&page_size=6"
+  const url = "https://paper-api.alpaca.markets/v2/account/activities?direction=desc&page_size=6";
   const config = {
     method: 'GET',
     headers: {
@@ -64,7 +75,6 @@ try {
   const data = response.data;
   
   for (let i in data) {
-    // <td>${data[i].description}</td>
     let tr = `<tr>
       <td>${data[i].activity_type}</td>
       <td>${data[i].qty}</td>
@@ -73,22 +83,41 @@ try {
     </tr>`
     tbody.innerHTML += tr;
   };
-
-  
 } catch(error) {
   console.error(error);
 }
 })();
 
 
-let auctions = () => {
-  fetch('https://data.alpaca.markets/v2/stocks/auctions?symbols=aapl%2Ctsla&start=2024-11-01&end=2024-11-04&limit=1000&feed=sip&sort=asc',
-    options)
+// Historical auctions
+let historicalAuctions = async () => {
+  try {
+    const url = `https://data.alpaca.markets/v2/stocks/auctions?symbols=${historicalSymbol}&start=${startDate}&end=${endDate}&limit=1000&feed=sip&sort=asc`;
+    const config = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        'APCA-API-KEY-ID': APCA_API_KEY['APCA-API-KEY-ID'],
+        'APCA-API-SECRET-KEY': APCA_API_KEY['APCA-API-SECRET-KEY']
+      }
+    };
+
+    let response = await axios.get(url, config);
+
+    if (response.status !== 200) {
+      throw new Error("API Error");
+    }
+
+    const data = response.data;
+    console.log(data);
+
+  } catch(error) {
+    console.error(error);
+  }
 }
 
+historicalAuctions();
 
-
-apiCall();
 
 // Event listeners
 // button.addEventListener("click", (e) => {
