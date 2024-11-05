@@ -73,3 +73,21 @@ input, select {
   background-color: white;
   height: 96vh;
 }
+
+table {
+  font-size: 12px;
+  border-collapse: collapse;
+  width: 100%;
+  height: 100px;
+  overflow: scroll;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 3px;
+}
+
+tr:nth-child(even) {
+  background-color: yellowgreen;
+}

@@ -1,4 +1,4 @@
-import { APCA_API_KEYS } from "./env.js";
+// import APCA_API_KEYS from "./env.js";
 const url = "https://paper-api.alpaca.markets/v2/account";
 
 let accountNumber = document.querySelector("#account_number");
@@ -8,6 +8,8 @@ let symbol = document.querySelector("#symbol");
 let quantity = document.querySelector("#quantity");
 let buy = document.querySelector("#buy");
 let sell = document.querySelector("#sell");
+let table = document.querySelector("#table");
+let tbody = table.querySelector("tbody");
 
 
 // API Call
@@ -18,8 +20,8 @@ let sell = document.querySelector("#sell");
       method: 'GET',
       headers: {
         accept: 'application/json',
-        'APCA-API-KEY-ID': APCA_API_KEYS.APCA_API_KEY_ID,
-        'APCA-API-SECRET-KEY': APCA_API_KEYS.APCA_API_SECRET_KEY
+        'APCA-API-KEY-ID': APCA_API_KEY['APCA-API-KEY-ID'],
+        'APCA-API-SECRET-KEY': APCA_API_KEY['APCA-API-SECRET-KEY']
       }
     };
 
@@ -30,7 +32,7 @@ let sell = document.querySelector("#sell");
     }
 
     const data = await response.data;
-    console.log(data);
+    // console.log(data);
 
     accountNumber.textContent = `Account#: ${data.account_number}`;
     buyingPower.innerText = `Buying Power:\n${data.currency}: $${data.buying_power}`;
@@ -43,13 +45,13 @@ let sell = document.querySelector("#sell");
 
 (activities = async () => {
 try {
-  const url = "https://paper-api.alpaca.markets/v2/account/activities?direction=desc&page_size=100"
+  const url = "https://paper-api.alpaca.markets/v2/account/activities?direction=desc&page_size=6"
   const config = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      'APCA-API-KEY-ID': APCA_API_KEYS.APCA_API_KEY_ID,
-      'APCA-API-SECRET-KEY': APCA_API_KEYS.APCA_API_SECRET_KEY
+      'APCA-API-KEY-ID': APCA_API_KEY['APCA-API-KEY-ID'],
+      'APCA-API-SECRET-KEY': APCA_API_KEY['APCA-API-SECRET-KEY']
     }
   };
 
@@ -60,7 +62,18 @@ try {
   }
 
   const data = response.data;
-  console.log(data);
+  
+  for (let i in data) {
+    // <td>${data[i].description}</td>
+    let tr = `<tr>
+      <td>${data[i].activity_type}</td>
+      <td>${data[i].qty}</td>
+      <td>${data[i].price}</td>
+      <td>${data[i].date}</td>
+    </tr>`
+    tbody.innerHTML += tr;
+  };
+
   
 } catch(error) {
   console.error(error);
