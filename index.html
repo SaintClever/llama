@@ -12,10 +12,16 @@
   <div id="container">
 
     <div id="dashboard">
-      <canvas id="currentTradeChart"></canvas>
-      <canvas id="userChart"></canvas>
-      <canvas id="globalChart">
-      </canvas>
+      <div id="logo" style="background-color: #fcfcfc; width: 99%; border-radius: 5px;">
+        <img style="text-align: center; margin: auto; display: block;"
+          src="https://cdn.dribbble.com/userupload/14841248/file/original-c05b9bded107ae5b0eb7db318635ea7a.png?resize=752x"
+          alt="">
+      </div>
+      <canvas id="currentTradeChart" style="width:100%; max-width:1031px; display: none;"></canvas>
+      <div style="padding-top: 5px;">
+        <canvas id="userChart"></canvas>
+        <canvas id="globalChart"></canvas>
+      </div>
     </div>
 
     <div id="controls">
@@ -55,8 +61,8 @@
       <hr>
       <br>
 
-      Historical Auctions<br>
-      <input type="text" id="historicalSymbol" placeholder="Symbol: AAPL,TSLA">
+      Historical Qoutes<br>
+      <input type="text" id="historical_symbol" placeholder="Symbol: AAPL,TSLA">
       <br>
 
       <label for="start_date">Start date:</label>
@@ -65,7 +71,7 @@
 
       <label for="end_date">End date:</label>
       <input type="date" name="end_date" id="end_date">
-      <button id="historicalBtn">Generate</button>
+      <button id="historical_btn">Generate</button>
       <br>
       <br>
 
@@ -87,7 +93,6 @@
 
     </div>
   </div>
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

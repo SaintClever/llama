@@ -18,12 +18,22 @@ button {
   padding: 5px;
 }
 
-#buy, #historicalBtn {
+#buy, #historical_btn {
   background-color: yellowgreen;
 }
 
 #sell {
   background-color: orangered;
+}
+
+/* mouse over link */
+#buy:active, #historical_btn:active {
+  background-color: green;
+}
+
+/* selected link */
+#sell:active {
+  background-color: brown;
 }
 
 hr {

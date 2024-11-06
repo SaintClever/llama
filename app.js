@@ -1,6 +1,9 @@
 // import APCA_API_KEY from "./env.js";
 const url = "https://paper-api.alpaca.markets/v2/account";
 
+// Canvas
+let currentTradeChart = document.querySelector("#currentTradeChart");
+
 // Account
 let accountNumber = document.querySelector("#account_number");
 let buyingPower = document.querySelector("#buying_power");
@@ -13,9 +16,10 @@ let buy = document.querySelector("#buy");
 let sell = document.querySelector("#sell");
 
 // Historical Auctions
+let historicalSymbol = document.querySelector("#historical_symbol");
 let startDate = document.querySelector("#start_date");
 let endDate = document.querySelector("#end_date");
-let historicalSymbol = document.querySelector("#historical_symbol");
+let historicalBtn = document.querySelector("#historical_btn");
 
 // Account Activites
 let table = document.querySelector("#table");
@@ -89,10 +93,13 @@ try {
 })();
 
 
-// Historical auctions
-let historicalAuctions = async () => {
+// Historical Quotes
+let historicalQuotes = async () => {
+  let removeSpaces = historicalSymbol.value.replaceAll(" ", "");
+  let symbol = encodeURIComponent(removeSpaces);
+
   try {
-    const url = `https://data.alpaca.markets/v2/stocks/auctions?symbols=${historicalSymbol}&start=${startDate}&end=${endDate}&limit=1000&feed=sip&sort=asc`;
+    const url = `https://data.alpaca.markets/v2/stocks/quotes?symbols=${symbol}&start=${startDate.value}&end=${endDate.value}&limit=18&feed=sip&sort=asc`;
     const config = {
       method: 'GET',
       headers: {
@@ -108,18 +115,64 @@ let historicalAuctions = async () => {
       throw new Error("API Error");
     }
 
-    const data = response.data;
-    console.log(data);
+    const data = response.data;    
+    let quotes = data.quotes[symbol.toUpperCase()]
+    let xValues = [];
+    let yValues = [];
 
+    for (let i in quotes) {
+      try {
+        xValues.push(quotes[i].ap);
+        yValues.push(quotes[i].bp);
+      } catch(error) {
+        console.error(error);
+      }
+    }
+
+    let test = [];
+    for (let i = 0; i < 18; i++) {
+      test.push(i);
+    }
+    new Chart("currentTradeChart", {
+      type: "line",
+      data: {
+        labels: test,
+        datasets: [{
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(0,0,255,1.0)",
+          borderColor: "rgba(0,0,255,0.1)",
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {display: false},
+        scales: {
+          yAxes: [{ticks: {min: 5, max: 250}}]
+        }
+      }
+    })
   } catch(error) {
     console.error(error);
   }
 }
 
-historicalAuctions();
-
 
 // Event listeners
+historicalBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  let logo = document.querySelector("#logo");
+  logo.style.display = "none";
+  currentTradeChart.style.display = "block";
+  historicalQuotes();
+})
+
+
+buy.addEventListener("click", (e) => {
+  e.preventDefault();
+})
+
+
 // button.addEventListener("click", (e) => {
 //   e.preventDefault();
 //   apiCall();
