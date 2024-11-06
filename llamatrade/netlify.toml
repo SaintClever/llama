@@ -1,0 +1,6 @@
+# netlify.toml
+[build]
+  # Specify the output directory from Vite
+  publish = "dist"
+  # Set the build command to Vite's build command
+  command = "npm run build"
