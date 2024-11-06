@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Llama Trading</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div id="container">
+
+    <div id="dashboard">
+      <!-- <dialog open
+        style="text-align: center; border-radius: 5px;  border: none;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin: 500px 0px 0px 20%;">
+        APCA-API-KEY-ID <input id="" type="password" placeholder="key" value="love"><br>
+        APCA-API-SECRET-KEY <input id="" type="password" placeholder="key" value="love">
+        <button id="key">Submit</button>
+      </dialog> -->
+
+      <div id="logo" style="background-color: #fcfcfc; width: 99%; border-radius: 5px;">
+        <img style="text-align: center; margin: auto; display: block;" src="./assets/llamatrade.png" alt="llama trade">
+      </div>
+      <canvas id="currentTradeChart" style="width:100%; max-width:1031px; display: none;"></canvas>
+      <div style="padding-top: 5px;">
+        <canvas id="userChart"></canvas>
+        <canvas id="globalChart"></canvas>
+      </div>
+    </div>
+
+    <div id="controls">
+      <h4 id="account_number"></h4>
+      <h5 id="buying_power"></h5>
+      <h5 id="cash"></h5>
+      <input type="text" id="symbol" placeholder="Symbol: AAPL,TSLA">
+      <input type="number" id="quantity" placeholder="Quantity"><br><br>
+
+      <select name="side" id="side">
+        <option value="buy">BUY</option>
+        <option value="sell">SELL</option>
+      </select>
+
+      <select name="order_type" id="order_type">
+        <option value="market">Market</option>
+        <option value="limit">Limit</option>
+        <option value="stop_limit">Stop Limit</option>
+        <option value="trailing_stop">Trailing Stop</option>
+      </select>
+
+      <select name="time_in_force" id="time_in_force">
+        <option value="day">DAY</option>
+        <option value="gtc">GTC</option>
+        <option value="opg">OPG</option>
+        <option value="cls">CLS</option>
+        <option value="ioc">IOC</option>
+        <option value="fok">FOK</option>
+      </select>
+      <br>
+      <br>
+
+      <button id="buy">BUY</button> <button id="sell">SELL</button>
+      <br>
+      <br>
+
+      <hr>
+      <br>
+
+      Historical Qoutes<br>
+      <input type="text" id="historical_symbol" placeholder="Symbol: AAPL,TSLA">
+      <br>
+
+      <label for="start_date">Start date:</label>
+      <input type="date" name="start_date" id="start_date">
+      <br>
+
+      <label for="end_date">End date:</label>
+      <input type="date" name="end_date" id="end_date">
+      <button id="historical_btn">Generate</button>
+      <br>
+      <br>
+
+      <hr>
+      <br>
+
+      <table id="table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Qty</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./app.js"></script>
+
+</body>
+
+</html>
