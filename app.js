@@ -34,8 +34,8 @@ let tbody = table.querySelector("tbody");
       method: 'GET',
       headers: {
         accept: 'application/json',
-        'APCA-API-KEY-ID': APCA_API_KEY_ID,
-        'APCA-API-SECRET-KEY': APCA_API_SECRET_KEY
+        'APCA-API-KEY-ID': APCA_API_KEY['APCA-API-KEY-ID'],
+        'APCA-API-SECRET-KEY': APCA_API_KEY['APCA-API-SECRET-KEY']
       }
     };
 
@@ -65,8 +65,8 @@ try {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      'APCA-API-KEY-ID': APCA_API_KEY_ID,
-      'APCA-API-SECRET-KEY': APCA_API_SECRET_KEY
+      'APCA-API-KEY-ID': APCA_API_KEY['APCA-API-KEY-ID'],
+      'APCA-API-SECRET-KEY': APCA_API_KEY['APCA-API-SECRET-KEY']
     }
   };
 
@@ -104,8 +104,8 @@ let historicalQuotes = async () => {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        'APCA-API-KEY-ID': APCA_API_KEY_ID,
-        'APCA-API-SECRET-KEY': APCA_API_SECRET_KEY
+        'APCA-API-KEY-ID': APCA_API_KEY['APCA-API-KEY-ID'],
+        'APCA-API-SECRET-KEY': APCA_API_KEY['APCA-API-SECRET-KEY']
       }
     };
 
@@ -129,14 +129,15 @@ let historicalQuotes = async () => {
       }
     }
 
-    let test = [];
+    let count = [];
     for (let i = 0; i < 18; i++) {
-      test.push(i);
+      count.push(i);
     }
+
     new Chart("currentTradeChart", {
       type: "line",
       data: {
-        labels: test,
+        labels: count,
         datasets: [{
           fill: false,
           lineTension: 0,
@@ -171,9 +172,3 @@ historicalBtn.addEventListener("click", (e) => {
 buy.addEventListener("click", (e) => {
   e.preventDefault();
 })
-
-
-// button.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   apiCall();
-// });
