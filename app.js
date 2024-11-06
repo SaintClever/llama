@@ -34,8 +34,8 @@ let tbody = table.querySelector("tbody");
       method: 'GET',
       headers: {
         accept: 'application/json',
-        'APCA-API-KEY-ID': APCA_API_KEY['APCA-API-KEY-ID'],
-        'APCA-API-SECRET-KEY': APCA_API_KEY['APCA-API-SECRET-KEY']
+        'APCA-API-KEY-ID': APCA_API_KEY_ID,
+        'APCA-API-SECRET-KEY': APCA_API_SECRET_KEY
       }
     };
 
@@ -65,8 +65,8 @@ try {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      'APCA-API-KEY-ID': APCA_API_KEY['APCA-API-KEY-ID'],
-      'APCA-API-SECRET-KEY': APCA_API_KEY['APCA-API-SECRET-KEY']
+      'APCA-API-KEY-ID': APCA_API_KEY_ID,
+      'APCA-API-SECRET-KEY': APCA_API_SECRET_KEY
     }
   };
 
@@ -104,8 +104,8 @@ let historicalQuotes = async () => {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        'APCA-API-KEY-ID': APCA_API_KEY['APCA-API-KEY-ID'],
-        'APCA-API-SECRET-KEY': APCA_API_KEY['APCA-API-SECRET-KEY']
+        'APCA-API-KEY-ID': APCA_API_KEY_ID,
+        'APCA-API-SECRET-KEY': APCA_API_SECRET_KEY
       }
     };
 
