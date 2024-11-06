@@ -1,5 +1,6 @@
-const APCA_API_KEY_ID = import.meta.env.APCA_API_KEY_ID;
-const APCA_API_SECRET_KEY = import.meta.env.APCA_API_SECRET_KEY;
+const APCA_API_KEY_ID = import.meta.env.VITE_APCA_API_KEY_ID;
+const APCA_API_SECRET_KEY = import.meta.env.VITE_APCA_API_SECRET_KEY;
+
 const url = "https://paper-api.alpaca.markets/v2/account";
 
 // Canvas
@@ -28,7 +29,7 @@ let tbody = table.querySelector("tbody");
 
 
 // Account Data
-(accountData = async () => {
+(async () => {
   try {
     const url = "https://paper-api.alpaca.markets/v2/account";
     const config = {
@@ -59,7 +60,7 @@ let tbody = table.querySelector("tbody");
 
 
 // Account Activities
-(accountActivities = async () => {
+(async () => {
 try {
   const url = "https://paper-api.alpaca.markets/v2/account/activities?direction=desc&page_size=6";
   const config = {
