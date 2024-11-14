@@ -82,10 +82,10 @@ try {
   
   for (let i in data) {
     let tr = `<tr>
-      <td>${data[i].activity_type}</td>
-      <td>${data[i].qty}</td>
-      <td>${data[i].price}</td>
-      <td>${data[i].date}</td>
+      <td>${data[i].activity_type === undefined ? '-': data[i].activity_type}</td>
+      <td>${data[i].qty === undefined ? '-': data[i].qty}</td>
+      <td>${data[i].price === undefined ? '-': data[i].price}</td>
+      <td>${data[i].date === undefined ? '-': data[i].date}</td>
     </tr>`
     tbody.innerHTML += tr;
   };
@@ -151,7 +151,7 @@ let historicalQuotes = async () => {
       options: {
         legend: {display: false},
         scales: {
-          yAxes: [{ticks: {min: 5, max: 250}}]
+          yAxes: [{ticks: {min: 5, max: 750}}]
         }
       }
     })

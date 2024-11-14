@@ -19,21 +19,25 @@
         <button id="key">Submit</button>
       </dialog> -->
 
-      <div id="logo" style="background-color: #fcfcfc; width: 99%; border-radius: 5px;">
-        <img style="text-align: center; margin: auto; display: block;" src="./assets/llamatrade.png" alt="llama trade">
+      <div id="logo" style="background-color: #fcfcfc; width: 99%; height: 66vh; border-radius: 5px;">
+        <img style="text-align: center; margin: auto; display: block; width: 68%;" src="./assets/llamatrade.png"
+          alt="llama trade">
       </div>
-      <canvas id="currentTradeChart" style="width:100%; max-width:1031px; display: none;"></canvas>
-      <div style="padding-top: 5px;">
+
+      <canvas id="currentTradeChart" style="width:100%; max-width:1040px; display: none;"></canvas>
+
+      <div style="padding: 10px 4px 0 0;">
         <canvas id="userChart"></canvas>
         <canvas id="globalChart"></canvas>
       </div>
+
     </div>
 
     <div id="controls">
       <h4 id="account_number"></h4>
       <h5 id="buying_power"></h5>
       <h5 id="cash"></h5>
-      <input type="text" id="symbol" placeholder="Symbol: AAPL,TSLA">
+      <input type="text" id="symbol" placeholder="Symbol: AAPL">
       <input type="number" id="quantity" placeholder="Quantity"><br><br>
 
       <select name="side" id="side">
@@ -61,13 +65,12 @@
 
       <button id="buy">BUY</button> <button id="sell">SELL</button>
       <br>
-      <br>
 
       <hr>
       <br>
 
       Historical Qoutes<br>
-      <input type="text" id="historical_symbol" placeholder="Symbol: AAPL,TSLA">
+      <input type="text" id="historical_symbol" placeholder="Symbol: AAPL">
       <br>
 
       <label for="start_date">Start date:</label>
