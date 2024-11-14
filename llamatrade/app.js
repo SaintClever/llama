@@ -1,5 +1,7 @@
 const APCA_API_KEY_ID = import.meta.env.VITE_APCA_API_KEY_ID;
 const APCA_API_SECRET_KEY = import.meta.env.VITE_APCA_API_SECRET_KEY;
+const MARKETAUX_KEY = import.meta.env.VITE_MARKETAUX_KEY;
+
 
 const url = "https://paper-api.alpaca.markets/v2/account";
 
@@ -26,6 +28,26 @@ let historicalBtn = document.querySelector("#historical_btn");
 // Account Activites
 let table = document.querySelector("#table");
 let tbody = table.querySelector("tbody");
+
+
+// News
+(async () => {
+  try {
+    const url = `https://api.marketaux.com/v1/news/all?&language=en&api_token=${MARKETAUX_KEY}`;
+
+    let response = await axios.get(url);
+
+    if (response.status !== 200) {
+      throw new Error("API Error");
+    }
+
+    const data = await response.data;
+    console.log(data);
+    
+  } catch(error) {
+    console.log(error);
+  }
+})();
 
 
 // Account Data

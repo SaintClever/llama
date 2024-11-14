@@ -49,6 +49,11 @@ input, select {
   border-bottom: 1px solid grey;
 }
 
+#news {
+  padding: 10px 4px 0 0;
+  display: flex;
+}
+
 #container {
   display: flex;
   flex-direction: row;
@@ -67,12 +72,17 @@ input, select {
 }
 
 #userChart {
-  width: 49.5%;
+  width: 508px;
+  height: 255px;
+  margin-right: 10px;
+  background-color: white;
   border-radius: 5px;
 }
 
 #globalChart {
-  width: 49.5%;
+  width: 508px;
+  height: 255px;
+  background-color: white;
   border-radius: 5px;
 }
 
@@ -106,17 +116,22 @@ tr:nth-child(even) {
   input, select {
     width: 100%;
   }
+  
+  #news {
+    display: block;
+  }
+
 
   #userChart {
     width: 99%;
-    height: 320px;
+    height: 315px;
     border-radius: 5px;
-    margin-bottom: 7px;
+    margin-bottom: 12px;
   }
   
   #globalChart {
     width: 99%;
-    height: 320px;
+    height: 315px;
     border-radius: 5px;
   }
 
