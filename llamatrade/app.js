@@ -29,6 +29,9 @@ let historicalBtn = document.querySelector("#historical_btn");
 let table = document.querySelector("#table");
 let tbody = table.querySelector("tbody");
 
+// News
+let globalChart = document.querySelector("#globalChart");
+
 
 // News
 (async () => {
@@ -42,7 +45,12 @@ let tbody = table.querySelector("tbody");
     }
 
     const data = await response.data;
-    console.log(data);
+    globalChart.innerHTML = `
+      <h4>${data.data[0].description}</h4>
+      <a href="${data.data[0].source}" target="_blank"><img style="width: 240px;" src="${data.data[0].image_url}"></a><br>
+      <a href="${data.data[0].source}" target="_blank">${data.data[0].source}</a>
+    `
+    console.log(data.data[0]);
     
   } catch(error) {
     console.log(error);

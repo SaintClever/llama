@@ -72,15 +72,21 @@ input, select {
 }
 
 #userChart {
-  width: 508px;
+  font-size: 12px;
+  line-height: 20px;
+  padding: 1px 15px;
+  width: 479px;
   height: 255px;
-  margin-right: 10px;
   background-color: white;
   border-radius: 5px;
+  margin-right: 10px;
 }
 
 #globalChart {
-  width: 508px;
+  font-size: 12px;
+  line-height: 20px;
+  padding: 1px 15px;
+  width: 479px;
   height: 255px;
   background-color: white;
   border-radius: 5px;
@@ -120,7 +126,6 @@ tr:nth-child(even) {
   #news {
     display: block;
   }
-
 
   #userChart {
     width: 99%;
