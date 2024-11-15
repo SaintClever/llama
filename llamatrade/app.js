@@ -17,6 +17,7 @@ let symbol = document.querySelector("#symbol");
 let quantity = document.querySelector("#quantity");
 let buy = document.querySelector("#buy");
 let sell = document.querySelector("#sell");
+let dialog = document.querySelector("#dialog");
 
 // Historical Auctions
 let historicalSymbol = document.querySelector("#historical_symbol");
@@ -29,6 +30,7 @@ let table = document.querySelector("#table");
 let tbody = table.querySelector("tbody");
 
 // News
+let logo = document.querySelector("#logo");
 let userChart = document.querySelector("#userChart");
 let globalChart = document.querySelector("#globalChart");
 
@@ -52,7 +54,6 @@ let globalChart = document.querySelector("#globalChart");
       throw new Error("API Error");
     }
     const data = await response.data;
-    console.log(data)
 
     globalChart.innerHTML = 
         `
@@ -70,34 +71,43 @@ let globalChart = document.querySelector("#globalChart");
 
 
 // User Stock Pick
-// let userStockPick = async () => {
-//   let removeSpaces = historicalSymbol.value.replaceAll(" ", "");
-//   let symbol = encodeURIComponent(removeSpaces);
+let userStockPick = async () => {
+  let removeSpaces = historicalSymbol.value.replaceAll(" ", "");
+  let symbol = encodeURIComponent(removeSpaces).toUpperCase();
   
-//   try {
-//     const url = `https://data.alpaca.markets/v1beta1/news?sort=desc&symbols=${symbol}`;
-//     const config = {
-//       method: 'GET',
-//       headers: {
-//         accept: 'application/json',
-//         'APCA-API-KEY-ID': APCA_API_KEY_ID,
-//         'APCA-API-SECRET-KEY': APCA_API_SECRET_KEY
-//       }
-//     };
+  try {
+    const url = `https://data.alpaca.markets/v1beta1/news?sort=desc&limit=1&symbols=${symbol}`;
+    const config = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        'APCA-API-KEY-ID': APCA_API_KEY_ID,
+        'APCA-API-SECRET-KEY': APCA_API_SECRET_KEY
+      }
+    };
     
-//     let response = await axios.get(url, config);
+    let response = await axios.get(url, config);
     
-//     if (response.status !== 200) {
-//       throw new Error("API Error");
-//     }
+    if (response.status !== 200) {
+      throw new Error("API Error");
+    }
 
-//     const data = await response.data;
-//     console.log(data);
+    const data = await response.data;
+    
+    userChart.innerHTML = 
+    `
+    <a href="${data.news[0].url}" target="_blank">
+      <h3>${data.news[0].headline}</h3>
+      <img style="width: 250px;" src="${data.news[0].images[2] === undefined ? './assets/llamatrade.png': data.news[0].images[2].url}" alt="${data.news[0].source}"><br>
+      Source: ${data.news[0].source}<br>
+      Author: ${data.news[0].author}
+    </a>
+    `;
 
-//   } catch(error) {
-//     console.log(error);
-//   }
-// }
+  } catch(error) {
+    console.log(error);
+  }
+}
 
 
 // Account Data
@@ -170,7 +180,7 @@ try {
 // Historical Quotes
 let historicalQuotes = async () => {
   let removeSpaces = historicalSymbol.value.replaceAll(" ", "");
-  let symbol = encodeURIComponent(removeSpaces);
+  let symbol = encodeURIComponent(removeSpaces).toUpperCase();
 
   try {
     const url = `https://data.alpaca.markets/v2/stocks/quotes?symbols=${symbol}&start=${startDate.value}&end=${endDate.value}&limit=18&feed=sip&sort=asc`;
@@ -234,16 +244,21 @@ let historicalQuotes = async () => {
 
 
 // Event listeners
+// Show History data
 historicalBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  let logo = document.querySelector("#logo");
   logo.style.display = "none";
   currentTradeChart.style.display = "block";
   historicalQuotes();
   userStockPick();
-})
+});
 
 
+// Buy Order
 buy.addEventListener("click", (e) => {
   e.preventDefault();
-})
+  dialog.style.display = "block";
+  setTimeout(() => {
+    dialog.style.display = "none";
+  }, 5000);
+});

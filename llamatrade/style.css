@@ -102,7 +102,7 @@ input, select {
   width: 25%;
   border-radius: 5px;
   background-color: white;
-  height: 104vh;
+  height: 101vh;
 }
 
 table {
@@ -146,11 +146,11 @@ tr:nth-child(even) {
   }
 
   #currentTradeChart {
-    width: 98% !important;
+    width: 99% !important;
     height: 500px !important;
   }
 
   #controls {
-    height: 143vh;
+    height: 138vh;
   }
 }
