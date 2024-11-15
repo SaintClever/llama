@@ -23,6 +23,10 @@ button {
   padding: 5px;
 }
 
+#dialogBtn {
+  background-color: #262e33;
+}
+
 #buy, #historical_btn {
   background-color: yellowgreen;
 }
