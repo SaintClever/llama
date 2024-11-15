@@ -3,7 +3,7 @@ const APCA_API_SECRET_KEY = import.meta.env.VITE_APCA_API_SECRET_KEY;
 
 
 const url = "https://paper-api.alpaca.markets/v2/account";
-const defaultImg = 'https://www.benzinga.com/next-assets/images/schema-publisher-logo-benzinga.png';
+const defaultImg = "https://www.benzinga.com/next-assets/images/schema-publisher-logo-benzinga.png";
 
 // Canvas
 let currentTradeChart = document.querySelector("#currentTradeChart");
@@ -60,7 +60,7 @@ let globalChart = document.querySelector("#globalChart");
         `
         <a href="${data.news[0].url}" target="_blank">
           <h3>${data.news[0].headline}</h3>
-          <img style="width: 250px;" src="${data.news[0].images[2] === undefined ? `./assets/llamatrade.png`: data.news[0].images[2].url}" alt="${data.news[0].source}"><br>
+          <img style="width: 250px;" src="${data.news[0].images[2] === undefined ? defaultImg: data.news[0].images[2].url}" alt="${data.news[0].source}"><br>
           Source: ${data.news[0].source}<br>
           Author: ${data.news[0].author}
         </a>
@@ -99,7 +99,7 @@ let userStockPick = async () => {
     `
     <a href="${data.news[0].url}" target="_blank">
       <h3>${data.news[0].headline}</h3>
-      <img style="width: 250px;" src="${data.news[0].images[2] === undefined ? `./assets/llamatrade.png`: data.news[0].images[2].url}" alt="${data.news[0].source}"><br>
+      <img style="width: 250px;" src="${data.news[0].images[2] === undefined ? defaultImg: data.news[0].images[2].url}" alt="${data.news[0].source}"><br>
       Source: ${data.news[0].source}<br>
       Author: ${data.news[0].author}
     </a>
