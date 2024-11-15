@@ -1,6 +1,5 @@
 const APCA_API_KEY_ID = import.meta.env.VITE_APCA_API_KEY_ID;
 const APCA_API_SECRET_KEY = import.meta.env.VITE_APCA_API_SECRET_KEY;
-const MARKETAUX_KEY = import.meta.env.VITE_MARKETAUX_KEY;
 
 
 const url = "https://paper-api.alpaca.markets/v2/account";
@@ -30,32 +29,75 @@ let table = document.querySelector("#table");
 let tbody = table.querySelector("tbody");
 
 // News
+let userChart = document.querySelector("#userChart");
 let globalChart = document.querySelector("#globalChart");
 
 
 // News
 (async () => {
   try {
-    const url = `https://api.marketaux.com/v1/news/all?&language=en&api_token=${MARKETAUX_KEY}`;
-
-    let response = await axios.get(url);
-
+    const url = 'https://data.alpaca.markets/v1beta1/news?sort=desc&limit=1';
+    const config = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        'APCA-API-KEY-ID': APCA_API_KEY_ID,
+        'APCA-API-SECRET-KEY': APCA_API_SECRET_KEY
+      }
+    };
+    
+    let response = await axios.get(url, config);
+    
     if (response.status !== 200) {
       throw new Error("API Error");
     }
-
     const data = await response.data;
-    globalChart.innerHTML = `
-      <h4>${data.data[0].description}</h4>
-      <a href="${data.data[0].source}" target="_blank"><img style="width: 240px;" src="${data.data[0].image_url}"></a><br>
-      <a href="${data.data[0].source}" target="_blank">${data.data[0].source}</a>
-    `
-    console.log(data.data[0]);
-    
+    console.log(data)
+
+    globalChart.innerHTML = 
+        `
+        <a href="${data.news[0].url}" target="_blank">
+          <h3>${data.news[0].headline}</h3>
+          <img style="width: 250px;" src="${data.news[0].images[2] === undefined ? './assets/llamatrade.png': data.news[0].images[2].url}" alt="${data.news[0].source}"><br>
+          Source: ${data.news[0].source}<br>
+          Author: ${data.news[0].author}
+        </a>
+        `;
   } catch(error) {
     console.log(error);
   }
 })();
+
+
+// User Stock Pick
+// let userStockPick = async () => {
+//   let removeSpaces = historicalSymbol.value.replaceAll(" ", "");
+//   let symbol = encodeURIComponent(removeSpaces);
+  
+//   try {
+//     const url = `https://data.alpaca.markets/v1beta1/news?sort=desc&symbols=${symbol}`;
+//     const config = {
+//       method: 'GET',
+//       headers: {
+//         accept: 'application/json',
+//         'APCA-API-KEY-ID': APCA_API_KEY_ID,
+//         'APCA-API-SECRET-KEY': APCA_API_SECRET_KEY
+//       }
+//     };
+    
+//     let response = await axios.get(url, config);
+    
+//     if (response.status !== 200) {
+//       throw new Error("API Error");
+//     }
+
+//     const data = await response.data;
+//     console.log(data);
+
+//   } catch(error) {
+//     console.log(error);
+//   }
+// }
 
 
 // Account Data
@@ -198,6 +240,7 @@ historicalBtn.addEventListener("click", (e) => {
   logo.style.display = "none";
   currentTradeChart.style.display = "block";
   historicalQuotes();
+  userStockPick();
 })
 
 
